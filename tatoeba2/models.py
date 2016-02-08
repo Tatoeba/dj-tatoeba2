@@ -159,7 +159,7 @@ class PrivateMessages(models.Model):
 class ReindexFlags(models.Model):
     id = models.AutoField(primary_key=True)
     sentence_id = models.IntegerField()
-    lang_id = models.IntegerField(blank=True, null=True)
+    lang = models.CharField(max_length=4, blank=True)
     indexed = models.IntegerField()
 
     class Meta:
@@ -206,7 +206,6 @@ class Sentences(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
     dico_id = models.IntegerField(blank=True, null=True)
     hasaudio = models.CharField(max_length=10)
-    lang_id = models.IntegerField(blank=True, null=True)
     script = models.CharField(max_length=4, blank=True)
     class Meta:
         db_table = 'sentences'
