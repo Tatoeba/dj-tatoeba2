@@ -57,6 +57,16 @@ class ZeroedDateTimeField(models.DateTimeField):
         else:
             return value
 
+class Audios(models.Model):
+    id = models.AutoField(primary_key=True)
+    sentence_id = models.IntegerField()
+    user_id = models.IntegerField(blank=True, null=True)
+    external = models.CharField(max_length=500, blank=True)
+    created = models.DateTimeField()
+    modified = models.DateTimeField()
+    class Meta:
+        db_table = 'audios'
+
 class Contributions(models.Model):
     sentence_id = models.IntegerField()
     sentence_lang = models.CharField(max_length=4, blank=True)
@@ -149,10 +159,12 @@ class PrivateMessages(models.Model):
     sender = models.IntegerField()
     user_id = models.IntegerField()
     date = models.DateTimeField()
-    folder = models.CharField(max_length=5)
+    folder = models.CharField(max_length=6)
     title = models.CharField(max_length=255)
     content = models.TextField()
     isnonread = models.IntegerField()
+    draft_recpts = models.CharField(max_length=255)
+    sent = models.IntegerField()
     class Meta:
         db_table = 'private_messages'
 
@@ -205,8 +217,8 @@ class Sentences(models.Model):
     created = models.DateTimeField(blank=True, null=True)
     modified = models.DateTimeField(blank=True, null=True)
     dico_id = models.IntegerField(blank=True, null=True)
-    hasaudio = models.CharField(max_length=10)
     script = models.CharField(max_length=4, blank=True)
+    hash = models.CharField(max_length=16)
     class Meta:
         db_table = 'sentences'
 
@@ -295,6 +307,7 @@ class Transcriptions(models.Model):
     script = models.CharField(max_length=4)
     text = models.CharField(max_length=10000)
     user_id = models.IntegerField(blank=True, null=True)
+    needsreview = models.IntegerField(db_column='needsReview')  # Field name made lowercase.
     created = models.DateTimeField()
     modified = models.DateTimeField()
 
@@ -319,6 +332,10 @@ class Users(models.Model):
     homepage = models.CharField(max_length=255)
     image = models.CharField(max_length=255)
     country_id = models.CharField(max_length=2, blank=True)
+    lang = models.CharField(max_length=100, blank=True)
+    is_public = models.IntegerField()
+    audio_license = models.CharField(max_length=50, blank=True)
+    audio_attribution_url = models.CharField(max_length=255, blank=True)
     class Meta:
         db_table = 'users'
 
@@ -336,11 +353,31 @@ class UsersLanguages(models.Model):
         db_table = 'users_languages'
         unique_together = ('of_user_id', 'by_user_id', 'language_code')
 
+class UsersVocabulary(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.IntegerField()
+    hash = models.CharField(max_length=16)
+    created = models.DateTimeField(blank=True, null=True)
+    vocabulary_id = models.IntegerField()
+    class Meta:
+        db_table = 'users_vocabulary'
+
 class Visitors(models.Model):
     ip = models.CharField(primary_key=True, unique=True, max_length=15)
     timestamp = models.IntegerField()
     class Meta:
         db_table = 'visitors'
+
+class Vocabulary(models.Model):
+    id = models.AutoField(primary_key=True)
+    lang = models.CharField(max_length=4, blank=True)
+    text = models.CharField(max_length=1500)
+    numsentences = models.IntegerField(db_column='numSentences', blank=True, null=True)  # Field name made lowercase.
+    numadded = models.IntegerField(db_column='numAdded', blank=True, null=True)  # Field name made lowercase.
+    created = models.DateTimeField(blank=True, null=True)
+    hash = models.CharField(max_length=16)
+    class Meta:
+        db_table = 'vocabulary'
 
 class Wall(models.Model):
     id = models.AutoField(primary_key=True)
