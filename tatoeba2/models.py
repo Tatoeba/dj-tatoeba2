@@ -332,8 +332,6 @@ class Users(models.Model):
     homepage = models.CharField(max_length=255)
     image = models.CharField(max_length=255)
     country_id = models.CharField(max_length=2, blank=True)
-    lang = models.CharField(max_length=100, blank=True)
-    is_public = models.IntegerField()
     audio_license = models.CharField(max_length=50, blank=True)
     audio_attribution_url = models.CharField(max_length=255, blank=True)
     class Meta:
