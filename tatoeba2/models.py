@@ -109,14 +109,6 @@ class FollowersUsers(models.Model):
     class Meta:
         db_table = 'followers_users'
 
-class Groups(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    created = models.DateTimeField(blank=True, null=True)
-    modified = models.DateTimeField(blank=True, null=True)
-    class Meta:
-        db_table = 'groups'
-
 class Languages(models.Model):
     id = models.AutoField(primary_key=True)
     code = models.CharField(unique=True, max_length=4, blank=True)
@@ -321,7 +313,7 @@ class Users(models.Model):
     since = models.DateTimeField()
     last_time_active = models.IntegerField()
     level = models.IntegerField()
-    group_id = models.IntegerField()
+    role = models.CharField(max_length=20)
     send_notifications = models.IntegerField()
     name = models.CharField(max_length=255)
     birthday = models.DateTimeField(blank=True, null=True)
