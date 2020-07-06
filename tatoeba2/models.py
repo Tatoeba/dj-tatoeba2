@@ -77,7 +77,6 @@ class Contributions(models.Model):
     action = models.CharField(max_length=6)
     user_id = models.IntegerField(blank=True, null=True)
     datetime = ZeroedDateTimeField()
-    ip = models.CharField(max_length=15, blank=True)
     type = models.CharField(max_length=8)
     id = models.AutoField(primary_key=True, unique=True)
     class Meta:
@@ -139,7 +138,6 @@ class LastContributions(models.Model):
     action = models.CharField(max_length=6)
     user_id = models.IntegerField(blank=True, null=True)
     datetime = models.DateTimeField()
-    ip = models.CharField(max_length=15, blank=True)
     type = models.CharField(max_length=8)
     id = models.AutoField(primary_key=True)
     class Meta:
