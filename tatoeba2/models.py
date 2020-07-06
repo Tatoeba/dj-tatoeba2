@@ -197,31 +197,6 @@ class SentencesTranslations(models.Model):
         db_table = 'sentences_translations'
         unique_together = ('sentence_id', 'translation_id')
 
-class SinogramSubglyphs(models.Model):
-    sinogram_id = models.IntegerField()
-    glyph = models.CharField(max_length=2, blank=True)
-    subglyph = models.CharField(max_length=2)
-    class Meta:
-        db_table = 'sinogram_subglyphs'
-
-class Sinograms(models.Model):
-    id = models.AutoField(primary_key=True)
-    utf = models.CharField(max_length=8)
-    glyph = models.CharField(max_length=10)
-    strokes = models.IntegerField(blank=True, null=True)
-    english = models.TextField(blank=True)
-    chin_trad = models.CharField(db_column='chin-trad', max_length=10, blank=True) # Field renamed to remove unsuitable characters.
-    chin_simpl = models.CharField(db_column='chin-simpl', max_length=10, blank=True) # Field renamed to remove unsuitable characters.
-    chin_pinyin = models.CharField(db_column='chin-pinyin', max_length=255, blank=True) # Field renamed to remove unsuitable characters.
-    jap_on = models.CharField(db_column='jap-on', max_length=255, blank=True) # Field renamed to remove unsuitable characters.
-    jap_kun = models.CharField(db_column='jap-kun', max_length=255, blank=True) # Field renamed to remove unsuitable characters.
-    frequency = models.FloatField()
-    checked = models.IntegerField()
-    subcharacterslist = models.CharField(max_length=255, blank=True)
-    usedbylist = models.CharField(db_column='usedByList', max_length=255, blank=True) # Field name made lowercase.
-    class Meta:
-        db_table = 'sinograms'
-
 class Tags(models.Model):
     id = models.AutoField(primary_key=True)
     internal_name = models.CharField(max_length=50)
