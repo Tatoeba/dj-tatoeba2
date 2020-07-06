@@ -11,39 +11,6 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-class Acos(models.Model):
-    id = models.AutoField(primary_key=True)
-    parent_id = models.IntegerField(blank=True, null=True)
-    model = models.CharField(max_length=255, blank=True)
-    foreign_key = models.IntegerField(blank=True, null=True)
-    alias = models.CharField(max_length=255, blank=True)
-    lft = models.IntegerField(blank=True, null=True)
-    rght = models.IntegerField(blank=True, null=True)
-    class Meta:
-        db_table = 'acos'
-
-class Aros(models.Model):
-    id = models.AutoField(primary_key=True)
-    parent_id = models.IntegerField(blank=True, null=True)
-    model = models.CharField(max_length=255, blank=True)
-    foreign_key = models.IntegerField(blank=True, null=True)
-    alias = models.CharField(max_length=255, blank=True)
-    lft = models.IntegerField(blank=True, null=True)
-    rght = models.IntegerField(blank=True, null=True)
-    class Meta:
-        db_table = 'aros'
-
-class ArosAcos(models.Model):
-    id = models.AutoField(primary_key=True)
-    aro_id = models.IntegerField()
-    aco_id = models.IntegerField()
-    field_create = models.CharField(db_column='_create', max_length=2) # Field renamed because it started with '_'.
-    field_read = models.CharField(db_column='_read', max_length=2) # Field renamed because it started with '_'.
-    field_update = models.CharField(db_column='_update', max_length=2) # Field renamed because it started with '_'.
-    field_delete = models.CharField(db_column='_delete', max_length=2) # Field renamed because it started with '_'.
-    class Meta:
-        db_table = 'aros_acos'
-
 # Datetime conversion back and forth from MySQL to Python fails when datetime
 # is zero. MySQL allows datetime to be zero, while Python doesn't. When Python
 # is unable to interpret a datetime, it replaces it by None (see MySQLdb.times,
