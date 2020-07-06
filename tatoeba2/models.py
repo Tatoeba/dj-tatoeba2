@@ -69,12 +69,6 @@ class FavoritesUsers(models.Model):
         db_table = 'favorites_users'
         unique_together = ('favorite_id', 'user_id')
 
-class FollowersUsers(models.Model):
-    follower_id = models.IntegerField()
-    user_id = models.IntegerField()
-    class Meta:
-        db_table = 'followers_users'
-
 class Languages(models.Model):
     id = models.AutoField(primary_key=True)
     code = models.CharField(unique=True, max_length=4, blank=True)
@@ -143,14 +137,6 @@ class SentenceAnnotations(models.Model):
     user_id = models.IntegerField()
     class Meta:
         db_table = 'sentence_annotations'
-
-class SentenceAnnotationsOld(models.Model):
-    id = models.AutoField(primary_key=True)
-    sentence_id = models.IntegerField()
-    meaning_id = models.IntegerField()
-    text = models.CharField(max_length=2000)
-    class Meta:
-        db_table = 'sentence_annotations_old'
 
 class SentenceComments(models.Model):
     id = models.AutoField(primary_key=True)
