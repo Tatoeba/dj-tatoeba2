@@ -124,6 +124,7 @@ class ReindexFlags(models.Model):
     sentence_id = models.IntegerField()
     lang = models.CharField(max_length=4, blank=True)
     indexed = models.IntegerField()
+    type = models.CharField(max_length=7)
 
     class Meta:
         db_table = 'reindex_flags'
