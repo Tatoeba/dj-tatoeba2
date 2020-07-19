@@ -164,6 +164,9 @@ class Sentences(models.Model):
     class Meta:
         db_table = 'sentences'
 
+    def __str__(self):
+        return '<Sentence: id={}>'.format(str(self.id))
+
 class SentencesLists(models.Model):
     id = models.AutoField(primary_key=True)
     is_public = models.IntegerField()
