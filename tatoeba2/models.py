@@ -160,7 +160,6 @@ class Sentences(models.Model):
     created = models.DateTimeField(blank=True, null=True)
     modified = models.DateTimeField(blank=True, null=True)
     script = models.CharField(max_length=4, blank=True)
-    hash = models.CharField(max_length=16)
     class Meta:
         db_table = 'sentences'
 
@@ -274,7 +273,6 @@ class UsersLanguages(models.Model):
 class UsersVocabulary(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.IntegerField()
-    hash = models.CharField(max_length=16)
     created = models.DateTimeField(blank=True, null=True)
     vocabulary_id = models.IntegerField()
     class Meta:
@@ -293,7 +291,6 @@ class Vocabulary(models.Model):
     numsentences = models.IntegerField(db_column='numSentences', blank=True, null=True)  # Field name made lowercase.
     numadded = models.IntegerField(db_column='numAdded', blank=True, null=True)  # Field name made lowercase.
     created = models.DateTimeField(blank=True, null=True)
-    hash = models.CharField(max_length=16)
     class Meta:
         db_table = 'vocabulary'
 
