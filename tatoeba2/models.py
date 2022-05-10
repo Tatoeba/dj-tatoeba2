@@ -60,6 +60,16 @@ class ContributionsStats(models.Model):
     class Meta:
         db_table = 'contributions_stats'
 
+class DisabledAudios(models.Model):
+    id = models.IntegerField(primary_key=True)
+    sentence_id = models.IntegerField()
+    user_id = models.IntegerField(blank=True, null=True)
+    external = models.CharField(max_length=500, blank=True)
+    created = models.DateTimeField()
+    modified = models.DateTimeField()
+    class Meta:
+        db_table = 'disabled_audios'
+
 class FavoritesUsers(models.Model):
     id = models.AutoField(primary_key=True)
     favorite_id = models.IntegerField()
